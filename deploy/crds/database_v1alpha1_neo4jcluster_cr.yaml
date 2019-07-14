@@ -1,0 +1,89 @@
+apiVersion: database.neo4j.org/v1alpha1
+kind: Neo4jCluster
+metadata:
+  name: example1
+#  namespace: db
+spec:
+  image-version: 3.5.4-enterprise
+  # Clear text password (base64-encoded below): Neo4J#Passw0rd123!
+  admin-password: TmVvNEojUGFzc3cwcmQxMjMh
+  core-replicas: 3
+#  core-args:
+#    NEO4J_dbms_allow__upgrade: "true"
+  read-replica-replicas: 1
+#  read-replica-args:
+#    NEO4J_dbms_allow__upgrade: "true"
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 2048Mi
+    limits:
+      cpu: 1000m
+      memory: 2048Mi
+  persistent-storage:
+    size: 1Gi
+  # Command to generate self-signed certificate:
+  # openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+#  ssl:
+#    key: |
+#      -----BEGIN PRIVATE KEY-----
+#      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDI05vZ7So8Ly6D
+#      RXfw3VQQzhmSkR9UPBXZnhG1vVa1KxwkUUZUJjAOeqrUqrvOKiccDRm2+COF+41U
+#      bJLU3JBeBfYyjQ71RaXxgawlSBN/PJRyi5JEujzC21j828y9Mc2wqFTeZcJzMbfa
+#      +zq2vWyOeJ+yRj84JRHiM/bpV6FygyQxAHRLvylQBPZbRgDgRUkhy9fWZuT0hFXB
+#      P2DW2w04y3IBbJF+ZaSJvrIB+YRwjQ1zI5mbKYGDeJ43qP8dPCVfQ/YefwRkx7IA
+#      bWRtB7VSM5JuXHNEgPcJQGJyYVOzs/30Dx5rc1hCZrHbcdIXTQ4IBZAOIbi6oxI2
+#      7l+kfXObAgMBAAECggEAZxGLhD4fFgJVCdRGaVz+Px23rCxE+vNXd3eTuUVyUcrN
+#      R6pawOdUdKnqMPlrJ7Ukm1Xx46DYgnQHJdQPS6Xjhg3jPDB/A8x6DUey9PNX5k5O
+#      FbeiGxnGA2+V7ThVjKgZ29eYrwdk08Apjv6vNIhlRX2M4G8DFSqZUhG/YCS0XFMd
+#      vnzxTepajyhemyfjC85F95Y+5YGl3BCKzhJlPHZnGJAcx2pyecSQtreIVTKBYxpl
+#      AffUpAVtGZl8StcFK3LzpmgDGxAsiUjXW1BiqgiFP7L+kic7e7oQdJAKVL9DJAn+
+#      IscMZ2dRo5FzMHVfT80T2Y+asTvBInkRMIJq15hFOQKBgQD9QxBMlB34pXPS7TiQ
+#      TIIFxKd7bWzywkxfQnrMmy2DXchFPPZ95/37opUty7PwVN0d4FkSuSEEYdiCjW9B
+#      abgU/KhfzfjD7DVYYSTV++wGyeqp0KKa0hGUkAIvX+DdMOOXgM+FJ8gIju5qMVTN
+#      T10x56i8vxi1h76tiID12eT0nQKBgQDK/2xY7Jz+JbsKFqZ3pnfsIkS2UIKT/tsQ
+#      ArZ1Q7nABixoyOGu77qMfwJ+bfqS+iGpC8dZMcwUEyreATnTHYe9SrgSWjYUUL1k
+#      yVoff7w8dnz3dtuDImCOi3m2Lts4AZV3SajtdnPjB8UZzua3EALj7Ea4hsSdvagT
+#      5nDMKj5nlwKBgQDB3a9BX3Rd3JD/2jUdSGOTdMjb05S9c3www1vq+bJqR8TBM3xg
+#      PtEN6ZOWPcNc6ilk8FJe4bXje97XeNq8UOfnsMxWof2WRF9Fav9eifxP6gqmuR1v
+#      s/RfK6lwiE1CJGVjmOfBvwUBgCACzAZlLyZgyDtDWGjatLGCduZ4y7XWhQKBgBRp
+#      hr2SXV748EvdZzPU2241K++hPOAg2mpLu4kjHESA2mpW+MqcdIe4JcoMyQuKd2QG
+#      OS9w4HKMUt0sBmKCL6oLH2NJCvMUA1dlH9jXAVibGYnQu9X92PO8dqqpH4YMMrli
+#      AMiQBqsnltw3f9+cjo3YrmvTsWWjMol9vI3rGYdVAoGBAJbyoJtYCBAlRosS2fsa
+#      JyZ3ZwtGj7yyxOxGaS5mWrtKIOBDXKazH5rMh6HRcFAR4GZDsIteSHLg6cPJCsct
+#      C+R1ch8wqqS92uag/ljYAhI5aVZhPn3ktTTwQ0bmoCQiOfKKYUEccWInPl1JRmOI
+#      U2RRbKeEcDhcABzPF0bJFEPR
+#      -----END PRIVATE KEY-----
+#    certificate: |
+#      -----BEGIN CERTIFICATE-----
+#      MIIDkzCCAnugAwIBAgIJAJMfoyRqXIZMMA0GCSqGSIb3DQEBBQUAMGAxCzAJBgNV
+#      BAYTAlBMMQ8wDQYDVQQHDAZXYXJzYXcxHDAaBgNVBAoME0RlZmF1bHQgQ29tcGFu
+#      eSBMdGQxDjAMBgNVBAsMBU5lbzRKMRIwEAYDVQQDDAluZW80ai5jb20wHhcNMTkw
+#      NTI0MTM1MzU1WhcNMjAwNTIzMTM1MzU1WjBgMQswCQYDVQQGEwJQTDEPMA0GA1UE
+#      BwwGV2Fyc2F3MRwwGgYDVQQKDBNEZWZhdWx0IENvbXBhbnkgTHRkMQ4wDAYDVQQL
+#      DAVOZW80SjESMBAGA1UEAwwJbmVvNGouY29tMIIBIjANBgkqhkiG9w0BAQEFAAOC
+#      AQ8AMIIBCgKCAQEAyNOb2e0qPC8ug0V38N1UEM4ZkpEfVDwV2Z4Rtb1WtSscJFFG
+#      VCYwDnqq1Kq7zionHA0ZtvgjhfuNVGyS1NyQXgX2Mo0O9UWl8YGsJUgTfzyUcouS
+#      RLo8wttY/NvMvTHNsKhU3mXCczG32vs6tr1sjnifskY/OCUR4jP26VehcoMkMQB0
+#      S78pUAT2W0YA4EVJIcvX1mbk9IRVwT9g1tsNOMtyAWyRfmWkib6yAfmEcI0NcyOZ
+#      mymBg3ieN6j/HTwlX0P2Hn8EZMeyAG1kbQe1UjOSblxzRID3CUBicmFTs7P99A8e
+#      a3NYQmax23HSF00OCAWQDiG4uqMSNu5fpH1zmwIDAQABo1AwTjAdBgNVHQ4EFgQU
+#      G0WkLNxl+5f/lDDEuRyiAeC7gKMwHwYDVR0jBBgwFoAUG0WkLNxl+5f/lDDEuRyi
+#      AeC7gKMwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAxf+CiLgHKImP
+#      98ANGrw5sD0a5cD+hEMczBPykxUP5sTKdIZzHiZE6vJbrpJhGKqy/FUdv1K3jyW8
+#      UtLJV3Wpzy7bAz/uYGkRCQ40NRTzIXPnIYzL06mAdNBQ0OScuF7r6MsuX0l+3UDO
+#      EL8A5fZJCVxCl0z8KYkocsoNrjdmJXkYOOG4xN/ErdChCkEQ10lsZELXzjpW/qSp
+#      VT+hfW1UVjAzNH0Mk6Q3b2hP7EdSV+l491npbWgW7RW2cwnHwOF6NvpaWC5hSlyE
+#      XToAxSuFbTEB2zr8fp0Bf2ffNLtmvHyEZXtukgyYbtZJGL+BBE9APks9GMwWBjaR
+#      DQnQ+OGUMw==
+#      -----END CERTIFICATE-----
+#  backup:
+#    schedule: "*/5 * * * *"
+#    size: 2Gi
+#    resources:
+#      requests:
+#        cpu: 200m
+#        memory: 1024Mi
+#      limits:
+#        cpu: 200m
+#        memory: 1024Mi

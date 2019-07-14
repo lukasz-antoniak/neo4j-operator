@@ -1,0 +1,11 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: neo4j-operator
+subjects:
+- kind: ServiceAccount
+  name: neo4j-operator
+roleRef:
+  kind: Role
+  name: neo4j-operator
+  apiGroup: rbac.authorization.k8s.io

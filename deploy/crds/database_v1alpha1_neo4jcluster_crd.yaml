@@ -1,0 +1,36 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: neo4jclusters.database.neo4j.org
+spec:
+  group: database.neo4j.org
+  names:
+    kind: Neo4jCluster
+    listKind: Neo4jClusterList
+    plural: neo4jclusters
+    singular: neo4jcluster
+  additionalPrinterColumns:
+  - name: Core Servers
+    type: string
+    description: Number of online and offline core servers
+    JSONPath: .status.core-stats
+  - name: Read Replicas
+    type: string
+    description: Number of online and offline read replicas servers
+    JSONPath: .status.replica-stats
+  - name: Leader
+    type: string
+    description: Name of the POD acting as leader
+    JSONPath: .status.leader
+  - name: Bolt URL
+    type: string
+    description: Bolt URL
+    JSONPath: .status.bolt-url
+  scope: Namespaced
+  subresources:
+    status: {}
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
